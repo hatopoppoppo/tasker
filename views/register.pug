@@ -1,0 +1,40 @@
+doctype html
+html(lang="ja")
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="preconnect", href="https://fonts.gstatic.com")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;700&display=swap")
+  body#formParent
+    if title == "アカウントの確認"
+      div#userForm.sendMail
+        p 入力されたアドレスにメールを送信しました。
+    else
+      form#userForm(action="/register", method="post")
+        div
+          p ユーザー名:
+          input(type="text", name="name",autocomplete="nickname")
+          if title == "ユーザー名を入力してください"
+            p.attention ユーザー名を入力してください
+          if title == "ユーザー名の長さが超過しています"
+            p.attention 登録できるユーザー名は15文字までです。
+            
+        div
+          p メールアドレス:
+          input(type="email", name="mail",autocomplete="email")
+          if title == "メールアドレスの形式が間違っています"
+            p.attention メールアドレスの形式が間違っています。
+        div
+          p パスワード:
+          input(type="password", name="password",autocomplete="new-password")
+        if title == "仮登録済"
+          p.attention 入力されたメールアドレスは既に仮登録されています。
+          p.attention 迷惑メールなどに振り分けられていないか確認をよろしくお願いいたします。
+        if title == "本登録済"
+          p.attention 入力されたメールアドレスは既に登録されています。
+          a.attention(href="/forgot/issue") パスワードを忘れた
+        div
+          button(type="submit") サインアップ
+        div#any
+          a.link(href="/login") 
+            p ログイン

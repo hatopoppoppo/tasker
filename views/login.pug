@@ -1,0 +1,24 @@
+doctype html
+html(lang="ja")
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="preconnect", href="https://fonts.gstatic.com")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;700&display=swap")
+  body#formParent
+    form#userForm(action="/login", method="post")
+      div
+        p メールアドレス:
+        input(type="email", name="mail",autocomplete="email")
+      div
+        p パスワード:
+        input(type="password", name="password",autocomplete="current-password")
+        if title == "ユーザー不適合"
+          p.attention メールアドレス又はパスワードが間違っています。
+      div
+        button(type="submit") ログイン
+      div#any
+        a.link(href="/register") 
+          p サインアップ
+        a.link(href="/forgot/issue")
+          p パスワードを忘れた
